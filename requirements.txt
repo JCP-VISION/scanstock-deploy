@@ -1,0 +1,14 @@
+#> Web-Framework ~ Printer for setting `web_label_printer = true` in pyproject.toml [configs]
+FastAPI
+uvicorn
+python-dotenv
+toml; python_version < "3.11" # else its BUILT INTO PYTHON 3.11+ as `tomllib`
+
+#> Printer
+pywin32; platform_system=="Windows"
+pycups; platform_system=="Linux"
+
+#> Barcode & Image Generation
+pillow # For image processing
+python-barcode # For barcode generation
+qrcode[pil] # For QR Code generation
