@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Docker Deployment | ScanStock Documentation</title>
+    <title>Contact & Licensing | ScanStock Documentation</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <link rel="stylesheet" href="https://jcp-vision.com/static/css/brand-styles.css">
     <link rel="stylesheet" href="assets/style.css">
@@ -23,6 +23,7 @@
                 <a href="installation.html">Installation</a>
                 <a href="docker.html">Docker</a>
                 <a href="configuration.html">Configuration</a>
+                <a href="contact.html">Contact</a>
             </nav>
             <div class="theme-toggle-container">
                 <button class="btn-theme" onclick="toggleTheme()">
@@ -34,45 +35,32 @@
         <main class="content-wrapper">
             <div class="content">
                 <header>
-                    <h1>Docker Deployment</h1>
-                    <p class="lead">Implementing ScanStock infrastructure using high-performance container orchestration.</p>
+                    <h1>Contact & Licensing</h1>
+                    <p class="lead">Procedures for license activation and technical support.</p>
                 </header>
 
-                <section id="compose-file">
-                    <h2>2️⃣ Create docker-compose.yml</h2>
-                    <p>Create a <code>docker-compose.yml</code> file in your project directory. This file defines the ScanStock service and its dependencies.</p>
-                    <pre><code>services:
-  scanstock:
-    image: ghcr.io/jcp-vision/scanstock:latest
-    container_name: scanstock
-    restart: unless-stopped
-    ports:
-      - "8000:8000"
-    env_file:
-      - .env
-    volumes:
-      - scanstock_data:/var/lib/jcp-vision
-
-volumes:
-  scanstock_data:</code></pre>
-                </section>
-
-                <section id="start">
-                    <h2>3️⃣ Start ScanStock</h2>
-                    <p>Initialize the deployment by running the following command in your terminal. This will pull the latest container image and start the application in the background.</p>
-                    <pre><code>docker compose up -d</code></pre>
-                    <div class="alert alert-note">
+                <section id="licensing">
+                    <h2>License Acquisition</h2>
+                    <p>
+                        ScanStock requires a valid <code>LICENSE_KEY</code> for operational functionality. To obtain or renew a license, please contact <strong>Jonathan Chacko Pattas (JCP-VISION)</strong> directly.
+                    </p>
+                    <div class="alert alert-important">
                         <div>
-                            <strong>Persistent Storage:</strong> ScanStock automatically creates a persistent volume (<code>scanstock_data</code>) to store your database and license information. This ensures your data remains safe even if the container is restarted or updated.
+                            <strong>Core Security:</strong> Licenses are tied to specific hardware fingerprints. Each deployment requires a unique identifier for backend verification and high-performance throughput.
                         </div>
                     </div>
                 </section>
 
-                <section id="access">
-                    <h2>4️⃣ Access the Application</h2>
-                    <p>Open your browser and navigate to:</p>
-                    <pre><code>http://localhost:8000</code></pre>
-                    <p>Login using the administrator credentials defined in your <code>.env</code> file.</p>
+                <section id="technical-support">
+                    <h2>Technical Support</h2>
+                    <p>
+                        For technical precision and engineering inquiries, please reach out via the official JCP-VISION communication channels. We provide detailed support for complex warehouse integrations and custom hardware configurations.
+                    </p>
+                    <div class="alert alert-note">
+                        <div>
+                            <strong>Engineering Response:</strong> Our technical team responds to infrastructure-related queries within one business day during standard operational hours.
+                        </div>
+                    </div>
                 </section>
 
                 <hr>

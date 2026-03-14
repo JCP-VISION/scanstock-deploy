@@ -38,20 +38,17 @@ reflectPreference();
 
 // Code Copy Buttons
 document.querySelectorAll("pre").forEach(block => {
-    const container = document.createElement("div");
-    container.className = "code-container";
-    
     const button = document.createElement("button");
     button.className = "copy-btn";
-    button.innerText = "Copy";
+    button.innerHTML = '<span>Copy</span>'; // Structure allows for CSS ::before icon
 
     button.onclick = () => {
         const codeText = block.querySelector("code") ? block.querySelector("code").innerText : block.innerText;
-        navigator.clipboard.writeText(codeText).then(() => {
-            button.innerText = "Copied!";
+        navigator.clipboard.writeText(codeText.replace(/Copy$/, '').trim()).then(() => {
+            button.querySelector('span').innerText = "Copied!";
             button.classList.add("copied");
             setTimeout(() => {
-                button.innerText = "Copy";
+                button.querySelector('span').innerText = "Copy";
                 button.classList.remove("copied");
             }, 2000);
         });
