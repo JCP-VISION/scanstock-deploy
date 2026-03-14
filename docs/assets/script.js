@@ -3,34 +3,9 @@
  * Handles theme toggling, copy-to-clipboard, and navigation.
  */
 
-// Theme Management
-const storageKey = 'scanstock-theme-preference';
-
-const getColorPreference = () => {
-    if (localStorage.getItem(storageKey)) {
-        return localStorage.getItem(storageKey);
-    }
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-};
-
-const setPreference = (theme) => {
-    localStorage.setItem(storageKey, theme);
-    reflectPreference();
-};
-
+// Theme Management - Enforced Dark Mode
 const reflectPreference = () => {
-    const theme = getColorPreference();
-    document.documentElement.setAttribute('data-theme', theme);
-    const themeBtn = document.querySelector('.btn-theme span');
-    if (themeBtn) {
-        themeBtn.innerText = theme === 'dark' ? 'Light Mode' : 'Dark Mode';
-    }
-};
-
-const toggleTheme = () => {
-    const currentTheme = getColorPreference();
-    const nextTheme = currentTheme === 'light' ? 'dark' : 'light';
-    setPreference(nextTheme);
+    document.documentElement.setAttribute('data-theme', 'dark');
 };
 
 // Initialize Theme

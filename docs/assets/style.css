@@ -1,22 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@600;700&display=swap');
 
 :root {
-  /* JCP-VISION Brand Tokens (Overrides from brand-styles.css) */
+  /* JCP-VISION Brand Tokens - Enforced Dark Mode */
   --jcp-primary: #68de7e;
   --jcp-primary-dark: #4db861;
   
-  /* Primary & Background - Light Mode */
-  --bg-primary: #f9fafa;
-  --bg-secondary: #ffffff;
-  --bg-sidebar: #101318;
-  --text-primary: #111827;
-  --text-secondary: #4B5563;
-  --text-muted: #9ca3af;
+  /* Primary & Background */
+  --bg-primary: #101318;
+  --bg-secondary: #1A1E24;
+  --bg-sidebar: #0a0c0f;
+  --text-primary: #ffffff;
+  --text-secondary: #9ca3af;
+  --text-muted: #6b7280;
   --accent-color: var(--jcp-primary);
   --accent-hover: var(--jcp-primary-dark);
-  --border-color: #E5E7EB;
+  --border-color: rgba(255, 255, 255, 0.05);
   --code-bg: #15181E;
-  --code-text: #ffffff;
+  --code-text: #68de7e;
   
   /* Spacing & Borders */
   --sidebar-width: 280px;
@@ -24,26 +24,14 @@
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 16px;
-  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-sm: 0 0 0 1px rgba(255, 255, 255, 0.05);
+  --shadow-md: 0 4px 20px -2px rgba(0, 0, 0, 0.5);
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
   
   /* Transitions */
   --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
   --transition-base: 300ms cubic-bezier(0.4, 0, 0.2, 1);
   --transition: var(--transition-base);
-}
-
-[data-theme="dark"] {
-  --bg-primary: #101318;
-  --bg-secondary: #1A1E24;
-  --bg-sidebar: #0a0c0f;
-  --text-primary: #ffffff;
-  --text-secondary: #9ca3af;
-  --text-muted: #6b7280;
-  --border-color: rgba(255, 255, 255, 0.05);
-  --shadow-sm: 0 0 0 1px rgba(255, 255, 255, 0.05);
-  --shadow-md: 0 4px 20px -2px rgba(0, 0, 0, 0.5);
 }
 
 * {
