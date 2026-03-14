@@ -1,15 +1,15 @@
 try:
-    import tomllib  # Python 3.11+
-except ModuleNotFoundError:
-    import toml as tomllib  # Python <3.11
-from dotenv import load_dotenv
-try:
     from SCANSTOCK.settings import BASE_DIR  # from django.conf import settings
     toml_file_exists = True
 except ModuleNotFoundError:
     from pathlib import Path
     BASE_DIR = Path(__file__).resolve().parent
     toml_file_exists = False
+from dotenv import load_dotenv
+try:
+    import tomllib  # Python 3.11+
+except ModuleNotFoundError:
+    import toml as tomllib  # Python <3.11
 import os
 
 def get_priority_config(path=None, key=None, default=None, data_type=None):
