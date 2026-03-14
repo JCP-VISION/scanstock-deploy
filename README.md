@@ -21,6 +21,29 @@ The fastest and recommended way to run **ScanStock** is with **Docker Compose**.
 
 ---
 
+# 0️⃣ Pull Docker Image
+
+Before starting, you must pull the **ScanStock** image from your preferred container registry.
+
+## <!-- Option A:  --> GitHub Container Registry (Recommended)
+
+```bash
+docker pull ghcr.io/jcp-vision/scanstock:latest
+```
+
+[![GitHub Registry](https://img.shields.io/badge/GitHub%20Registry-ghcr.io-blue?style=flat&logo=github)](https://github.com/JCP-VISION/SCANSTOCK/pkgs/container/scanstock)
+
+<!--
+## Option B: Docker Hub
+
+```bash
+docker pull docker.io/jcpvision/scanstock:latest
+```
+
+[![Docker Hub](https://img.shields.io/badge/Docker%20Hub-docker.io-blue?style=flat&logo=docker)](https://hub.docker.com/r/jcpvision/scanstock)
+-->
+---
+
 # 1️⃣ Create Environment File
 
 Copy the example configuration file and create your runtime environment file.
@@ -37,7 +60,7 @@ cp environment/.env.example .env
 
 Then edit `.env` and configure the required values:
 
-```
+```ini
 LICENSE_KEY=
 DJANGO_SUPERUSER_USERNAME=
 DJANGO_SUPERUSER_PASSWORD=
@@ -52,7 +75,7 @@ These credentials will be used to initialize the ScanStock administrator account
 
 Create a file called:
 
-```
+```yaml
 docker-compose.yml
 ```
 
@@ -101,7 +124,7 @@ Docker will:
 
 Open your browser:
 
-```
+```text
 http://localhost:8000
 ```
 
@@ -140,7 +163,7 @@ These variables are used during the **first initialization of the container** to
 
 Example:
 
-```
+```ini
 LICENSE_KEY=XXXX-XXXX-XXXX
 DJANGO_SUPERUSER_USERNAME=admin
 DJANGO_SUPERUSER_PASSWORD=StrongPassword123
@@ -180,7 +203,7 @@ However enterprise deployments can connect to **external databases**.
 
 Enable external database configuration:
 
-```
+```ini
 CUSTOM_ENGINE=true
 ```
 
@@ -197,7 +220,7 @@ Then configure database settings:
 
 Example MySQL configuration:
 
-```
+```ini
 CUSTOM_ENGINE=true
 DB_ENGINE=django.db.backends.mysql
 DB_NAME=scanstock
@@ -255,7 +278,7 @@ Optional environment variables may be used for security hardening.
 
 Example:
 
-```
+```ini
 SECRET_KEY=super-secret-key
 SESSION_COOKIE_SECURE=True
 CSRF_COOKIE_SECURE=True
@@ -279,7 +302,7 @@ Optional configuration:
 
 Example:
 
-```
+```ini
 PRINTER_MODE=network
 PRINTER_HOST=192.168.1.45
 PRINTER_PORT=9100
@@ -310,7 +333,7 @@ This ensures:
 
 ## View Logs
 
-```
+```bash
 docker compose logs -f scanstock
 ```
 
@@ -349,9 +372,9 @@ This repository may be used to **deploy and operate ScanStock**, but redistribut
 
 A valid **ScanStock license key** is required to operate the platform.
 
-For licensing inquiries contact:
+For licensing inquiries [contact](mailto:licensing@jcp-vision.com):
 
-```
+```text
 licensing@jcp-vision.com
 ```
 
