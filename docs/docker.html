@@ -1,49 +1,79 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Docker Deployment</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docker Deployment | ScanStock Documentation</title>
+    <link rel="stylesheet" href="assets/style.css">
+    <script defer src="assets/script.js"></script>
 </head>
-
 <body>
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <span>ScanStock</span>
+            </div>
+            <nav>
+                <a href="index.html">Overview</a>
+                <a href="installation.html">Installation</a>
+                <a href="docker.html">Docker</a>
+                <a href="configuration.html">Configuration</a>
+                <a href="api.html">API Reference</a>
+            </nav>
+            <div class="theme-toggle-container">
+                <button class="btn-theme" onclick="toggleTheme()">
+                    <span>Dark Mode</span>
+                </button>
+            </div>
+        </aside>
 
-<h1>Docker Compose Deployment</h1>
+        <main class="content-wrapper">
+            <div class="content">
+                <header>
+                    <h1>Docker Deployment</h1>
+                    <p class="lead">Deploying ScanStock using Docker Compose for production environments.</p>
+                </header>
 
-<h2>docker-compose.yml</h2>
-
-<pre>
-services:
-
+                <section id="compose-file">
+                    <h2>2️⃣ Create docker-compose.yml</h2>
+                    <p>Create a <code>docker-compose.yml</code> file in your project directory with the following configuration:</p>
+                    <pre><code>services:
   scanstock:
     image: ghcr.io/jcp-vision/scanstock:latest
     container_name: scanstock
     restart: unless-stopped
-
     ports:
       - "8000:8000"
-
     env_file:
       - .env
-
     volumes:
       - scanstock_data:/var/lib/jcp-vision
 
 volumes:
-  scanstock_data:
-</pre>
+  scanstock_data:</code></pre>
+                </section>
 
-<h2>Start Container</h2>
+                <section id="start">
+                    <h2>3️⃣ Start ScanStock</h2>
+                    <p>Run the following command to start the application in detached mode:</p>
+                    <pre><code>docker compose up -d</code></pre>
+                    <p>Docker will pull the image, create the persistent storage volume, and start the application.</p>
+                </section>
 
-<pre>
-docker compose up -d
-</pre>
+                <section id="access">
+                    <h2>4️⃣ Access the Application</h2>
+                    <p>Open your browser and navigate to:</p>
+                    <pre><code>http://localhost:8000</code></pre>
+                    <p>Login using the administrator credentials defined in your <code>.env</code> file.</p>
+                </section>
 
-<h2>Access Application</h2>
+                <hr>
 
-<pre>
-http://localhost:8000
-</pre>
-
+                <footer>
+                    <p>&copy; 2026 <strong>JCP-VISION LIMITED</strong></p>
+                </footer>
+            </div>
+        </main>
+    </div>
 </body>
 </html>

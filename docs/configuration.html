@@ -1,55 +1,139 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Configuration</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuration Reference | ScanStock Documentation</title>
+    <link rel="stylesheet" href="assets/style.css">
+    <script defer src="assets/script.js"></script>
 </head>
-
 <body>
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <span>ScanStock</span>
+            </div>
+            <nav>
+                <a href="index.html">Overview</a>
+                <a href="installation.html">Installation</a>
+                <a href="docker.html">Docker</a>
+                <a href="configuration.html">Configuration</a>
+                <a href="api.html">API Reference</a>
+            </nav>
+            <div class="theme-toggle-container">
+                <button class="btn-theme" onclick="toggleTheme()">
+                    <span>Dark Mode</span>
+                </button>
+            </div>
+        </aside>
 
-<h1>Configuration</h1>
+        <main class="content-wrapper">
+            <div class="content">
+                <header>
+                    <h1>Configuration</h1>
+                    <p class="lead">Complete reference for all environment variables supported by ScanStock.</p>
+                </header>
 
-<h2>Environment Variables</h2>
+                <section id="core-settings">
+                    <h2>🔑 Core Application Settings</h2>
+                    <p>These values are required for initial setup and account initialization.</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Variable</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>LICENSE_KEY</code></td>
+                                <td>Your ScanStock license key issued by JCP-VISION.</td>
+                            </tr>
+                            <tr>
+                                <td><code>DJANGO_SUPERUSER_USERNAME</code></td>
+                                <td>Administrator username created during first startup.</td>
+                            </tr>
+                            <tr>
+                                <td><code>DJANGO_SUPERUSER_PASSWORD</code></td>
+                                <td>Administrator password.</td>
+                            </tr>
+                            <tr>
+                                <td><code>DJANGO_SUPERUSER_EMAIL</code></td>
+                                <td>Administrator email address.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
 
-<table>
+                <section id="database">
+                    <h2>🗄 Database Configuration</h2>
+                    <p>By default, ScanStock uses <strong>SQLite</strong> stored in the persistent volume. For enterprise deployments, use external databases by setting <code>CUSTOM_ENGINE=true</code>.</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Variable</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>CUSTOM_ENGINE</code></td>
+                                <td>Set to <code>true</code> to enable external database configuration.</td>
+                            </tr>
+                            <tr>
+                                <td><code>DB_ENGINE</code></td>
+                                <td>Backend: <code>django.db.backends.mysql</code> or <code>postgresql</code>.</td>
+                            </tr>
+                            <tr>
+                                <td><code>DB_NAME</code></td>
+                                <td>Database name.</td>
+                            </tr>
+                            <tr>
+                                <td><code>DB_HOST</code></td>
+                                <td>Database host address.</td>
+                            </tr>
+                            <tr>
+                                <td><code>DB_PORT</code></td>
+                                <td>Database port (3306 for MySQL, 5432 for Postgres).</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
 
-<tr>
-<th>Variable</th>
-<th>Description</th>
-</tr>
+                <section id="printer">
+                    <h2>🖨 Printer Integration</h2>
+                    <p>Optional settings for connecting to warehouse label printers.</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Variable</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>PRINTER_MODE</code></td>
+                                <td>Connection type: <code>local</code> or <code>network</code>.</td>
+                            </tr>
+                            <tr>
+                                <td><code>PRINTER_HOST</code></td>
+                                <td>Printer IP address.</td>
+                            </tr>
+                            <tr>
+                                <td><code>PRINTER_PORT</code></td>
+                                <td>Printer communication port (default 9100).</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
 
-<tr>
-<td>LICENSE_KEY</td>
-<td>ScanStock license key</td>
-</tr>
+                <hr>
 
-<tr>
-<td>DJANGO_SUPERUSER_USERNAME</td>
-<td>Admin username</td>
-</tr>
-
-<tr>
-<td>DJANGO_SUPERUSER_PASSWORD</td>
-<td>Admin password</td>
-</tr>
-
-<tr>
-<td>DJANGO_SUPERUSER_EMAIL</td>
-<td>Admin email</td>
-</tr>
-
-</table>
-
-<h2>Database</h2>
-
-<p>
-By default ScanStock uses SQLite stored inside the Docker volume.
-</p>
-
-<p>
-Enterprise deployments may configure MySQL or PostgreSQL.
-</p>
-
+                <footer>
+                    <p>&copy; 2026 <strong>JCP-VISION LIMITED</strong></p>
+                </footer>
+            </div>
+        </main>
+    </div>
 </body>
 </html>

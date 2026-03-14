@@ -1,37 +1,73 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Installation - ScanStock</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Installation | ScanStock Documentation</title>
+    <link rel="stylesheet" href="assets/style.css">
+    <script defer src="assets/script.js"></script>
 </head>
-
 <body>
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <span>ScanStock</span>
+            </div>
+            <nav>
+                <a href="index.html">Overview</a>
+                <a href="installation.html">Installation</a>
+                <a href="docker.html">Docker</a>
+                <a href="configuration.html">Configuration</a>
+                <a href="api.html">API Reference</a>
+            </nav>
+            <div class="theme-toggle-container">
+                <button class="btn-theme" onclick="toggleTheme()">
+                    <span>Dark Mode</span>
+                </button>
+            </div>
+        </aside>
 
-<h1>Installation</h1>
+        <main class="content-wrapper">
+            <div class="content">
+                <header>
+                    <h1>Installation</h1>
+                    <p class="lead">Step-by-step guide to setting up your ScanStock environment.</p>
+                </header>
 
-<h2>Pull the Container Image</h2>
+                <section id="registry">
+                    <h2>0️⃣ Pull Docker Image</h2>
+                    <p>Before starting, you must pull the <strong>ScanStock</strong> image from the GitHub Container Registry.</p>
+                    <pre><code>docker pull ghcr.io/jcp-vision/scanstock:latest</code></pre>
+                </section>
 
-<pre>
-docker pull ghcr.io/jcp-vision/scanstock:latest
-</pre>
-
-<p>This pulls the official ScanStock container image.</p>
-
-<h2>Create Environment File</h2>
-
-<pre>
-cp .env.example .env
-</pre>
-
-Example:
-
-<pre>
-LICENSE_KEY=XXXX-XXXX
+                <section id="env-file">
+                    <h2>1️⃣ Create Environment File</h2>
+                    <p>Copy the example configuration file and create your runtime environment file.</p>
+                    <pre><code>cp .env.example .env</code></pre>
+                    <p>Then edit <code>.env</code> and configure the required values:</p>
+                    <pre><code>LICENSE_KEY=your-key-here
 DJANGO_SUPERUSER_USERNAME=admin
 DJANGO_SUPERUSER_PASSWORD=StrongPassword123
-DJANGO_SUPERUSER_EMAIL=admin@company.com
-</pre>
+DJANGO_SUPERUSER_EMAIL=admin@company.com</code></pre>
+                    <div class="alert alert-note">
+                        <div>
+                            These credentials will be used to initialize the ScanStock administrator account on first startup.
+                        </div>
+                    </div>
+                </section>
 
+                <section id="next-steps">
+                    <h2>Next Steps</h2>
+                    <p>Once your environment is prepared, proceed to the <a href="docker.html">Docker Deployment</a> guide to launch the application.</p>
+                </section>
+
+                <hr>
+
+                <footer>
+                    <p>&copy; 2026 <strong>JCP-VISION LIMITED</strong></p>
+                </footer>
+            </div>
+        </main>
+    </div>
 </body>
 </html>

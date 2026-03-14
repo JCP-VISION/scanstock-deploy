@@ -1,35 +1,72 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Health Endpoint</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Reference | ScanStock Documentation</title>
+    <link rel="stylesheet" href="assets/style.css">
+    <script defer src="assets/script.js"></script>
 </head>
-
 <body>
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <span>ScanStock</span>
+            </div>
+            <nav>
+                <a href="index.html">Overview</a>
+                <a href="installation.html">Installation</a>
+                <a href="docker.html">Docker</a>
+                <a href="configuration.html">Configuration</a>
+                <a href="api.html">API Reference</a>
+            </nav>
+            <div class="theme-toggle-container">
+                <button class="btn-theme" onclick="toggleTheme()">
+                    <span>Dark Mode</span>
+                </button>
+            </div>
+        </aside>
 
-<h1>Health Endpoint</h1>
+        <main class="content-wrapper">
+            <div class="content">
+                <header>
+                    <h1>API Reference</h1>
+                    <p class="lead">Integration guide and system monitoring endpoints for ScanStock.</p>
+                </header>
 
-<p>The documentation site exposes a simple health endpoint.</p>
+                <section id="health">
+                    <h2>Health Check</h2>
+                    <p>Use this endpoint to monitor the deployment status of the documentation service.</p>
+                    <pre><code>GET /health</code></pre>
+                    
+                    <h3>Example Request</h3>
+                    <pre><code>curl https://scanstock-docs.jcp-vision.com/health</code></pre>
+                    
+                    <h3>Response</h3>
+                    <pre><code>{
+  "status": "ok",
+  "service": "scanstock-docs",
+  "version": "1.0.0"
+}</code></pre>
+                </section>
 
-<pre>
-GET /health
-</pre>
+                <section id="integration">
+                    <h2>Enterprise Integration</h2>
+                    <p>ScanStock provides internal APIs for inventory synchronization and warehouse management integration.</p>
+                    <div class="alert alert-note">
+                        <div>
+                            <strong>Note:</strong> Comprehensive API documentation for the core ScanStock application is available within the admin dashboard under the <strong>Developer Settings</strong> section.
+                        </div>
+                    </div>
+                </section>
 
-Example:
+                <hr>
 
-<pre>
-curl https://scanstock-docs.jcp-vision.com/health
-</pre>
-
-Response:
-
-<pre>
-{
- "status": "ok",
- "service": "scanstock-docs"
-}
-</pre>
-
+                <footer>
+                    <p>&copy; 2026 <strong>JCP-VISION LIMITED</strong></p>
+                </footer>
+            </div>
+        </main>
+    </div>
 </body>
 </html>

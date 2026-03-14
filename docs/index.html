@@ -1,49 +1,73 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>ScanStock Docs</title>
-
-<link rel="stylesheet" href="assets/style.css">
-<script defer src="assets/script.js"></script>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Overview | ScanStock Documentation</title>
+    <link rel="stylesheet" href="assets/style.css">
+    <script defer src="assets/script.js"></script>
 </head>
-
 <body>
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <span>ScanStock</span>
+            </div>
+            <nav>
+                <a href="index.html">Overview</a>
+                <a href="installation.html">Installation</a>
+                <a href="docker.html">Docker</a>
+                <a href="configuration.html">Configuration</a>
+                <a href="api.html">API Reference</a>
+            </nav>
+            <div class="theme-toggle-container">
+                <button class="btn-theme" onclick="toggleTheme()">
+                    <span>Dark Mode</span>
+                </button>
+            </div>
+        </aside>
 
-<div class="layout">
+        <main class="content-wrapper">
+            <div class="content">
+                <header>
+                    <h1>ScanStock Deployment</h1>
+                    <p class="lead">Official deployment resources for running ScanStock using Docker containers.</p>
+                </header>
 
-<aside class="sidebar">
+                <div class="alert alert-note">
+                    <div>
+                        <strong>Proprietary Software:</strong> This repository does not contain the proprietary ScanStock application source code. It contains the deployment templates required to run the platform.
+                    </div>
+                </div>
 
-<h2>ScanStock</h2>
+                <section id="overview">
+                    <p>
+                        <strong>ScanStock</strong> is a premium inventory and barcode scanning platform designed for high-efficiency warehouse and factory operations.
+                    </p>
+                    <p>
+                        This documentation provides comprehensive guides for:
+                    </p>
+                    <ul>
+                        <li>Official deployment documentation</li>
+                        <li>Docker Compose configuration</li>
+                        <li>Environment configuration templates</li>
+                        <li>Example integration components</li>
+                    </ul>
+                </section>
 
-<nav>
-<a href="index.html">Overview</a>
-<a href="installation.html">Installation</a>
-<a href="docker.html">Docker</a>
-<a href="configuration.html">Configuration</a>
-<a href="api.html">API</a>
-</nav>
+                <section id="quick-start">
+                    <h2>Quick Start</h2>
+                    <p>The fastest way to get started is by pulling the ScanStock image from the GitHub Container Registry.</p>
+                    <pre><code>docker pull ghcr.io/jcp-vision/scanstock:latest</code></pre>
+                </section>
 
-<button onclick="toggleTheme()">Toggle Dark Mode</button>
+                <hr>
 
-</aside>
-
-<main class="content">
-
-<h1>ScanStock Deployment</h1>
-
-<p>
-Official deployment documentation for ScanStock.
-</p>
-
-<h2>Quick Start</h2>
-
-<pre><code>docker pull ghcr.io/jcp-vision/scanstock:latest</code></pre>
-
-</main>
-
-</div>
-
+                <footer>
+                    <p>&copy; 2026 <strong>JCP-VISION LIMITED</strong></p>
+                </footer>
+            </div>
+        </main>
+    </div>
 </body>
 </html>
