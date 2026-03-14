@@ -18,7 +18,6 @@
                 <a href="installation.html">Installation</a>
                 <a href="docker.html">Docker</a>
                 <a href="configuration.html">Configuration</a>
-                <a href="api.html">API Reference</a>
             </nav>
             <div class="theme-toggle-container">
                 <button class="btn-theme" onclick="toggleTheme()">
@@ -30,34 +29,34 @@
         <main class="content-wrapper">
             <div class="content">
                 <header>
-                    <h1>ScanStock Deployment</h1>
-                    <p class="lead">Official deployment resources for running ScanStock using Docker containers.</p>
+                    <h1>ScanStock Deployment Guide</h1>
+                    <p class="lead">Welcome to the official ScanStock setup and deployment resource. This guide is designed to help you get your warehouse and factory operations running efficiently using our Docker-based platform.</p>
                 </header>
 
                 <div class="alert alert-note">
                     <div>
-                        <strong>Proprietary Software:</strong> This repository does not contain the proprietary ScanStock application source code. It contains the deployment templates required to run the platform.
+                        <strong>Deployment Resources:</strong> This documentation site provides the necessary templates and configurations to deploy ScanStock on your server. Please note that the proprietary application source code is provided separately via our secure container registry.
                     </div>
                 </div>
 
                 <section id="overview">
                     <p>
-                        <strong>ScanStock</strong> is a premium inventory and barcode scanning platform designed for high-efficiency warehouse and factory operations.
+                        <strong>ScanStock</strong> is a premium inventory and barcode scanning platform engineered for high-performance warehouse management. By utilizing Docker, we ensure a consistent, secure, and easily maintainable environment for your critical operations.
                     </p>
                     <p>
-                        This documentation provides comprehensive guides for:
+                        This documentation covers:
                     </p>
                     <ul>
-                        <li>Official deployment documentation</li>
-                        <li>Docker Compose configuration</li>
-                        <li>Environment configuration templates</li>
-                        <li>Example integration components</li>
+                        <li>Step-by-step installation and environment preparation.</li>
+                        <li>Docker Compose configuration for rapid deployment.</li>
+                        <li>Comprehensive environment variable reference for customization.</li>
+                        <li>Integration guidelines for hardware such as label printers.</li>
                     </ul>
                 </section>
 
                 <section id="quick-start">
                     <h2>Quick Start</h2>
-                    <p>The fastest way to get started is by pulling the ScanStock image from the GitHub Container Registry.</p>
+                    <p>To begin the deployment process, you will first need to pull the ScanStock container image from our registry. We recommend using the GitHub Container Registry for the latest stable releases.</p>
                     <pre><code>docker pull ghcr.io/jcp-vision/scanstock:latest</code></pre>
                 </section>
 

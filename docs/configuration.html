@@ -18,7 +18,6 @@
                 <a href="installation.html">Installation</a>
                 <a href="docker.html">Docker</a>
                 <a href="configuration.html">Configuration</a>
-                <a href="api.html">API Reference</a>
             </nav>
             <div class="theme-toggle-container">
                 <button class="btn-theme" onclick="toggleTheme()">
@@ -36,7 +35,7 @@
 
                 <section id="core-settings">
                     <h2>🔑 Core Application Settings</h2>
-                    <p>These values are required for initial setup and account initialization.</p>
+                    <p>These values are mandatory for the initial setup and activation of your ScanStock instance.</p>
                     <table>
                         <thead>
                             <tr>
@@ -47,19 +46,45 @@
                         <tbody>
                             <tr>
                                 <td><code>LICENSE_KEY</code></td>
-                                <td>Your ScanStock license key issued by JCP-VISION.</td>
+                                <td><strong>Required.</strong> Your unique license key issued by JCP-VISION.</td>
                             </tr>
                             <tr>
                                 <td><code>DJANGO_SUPERUSER_USERNAME</code></td>
-                                <td>Administrator username created during first startup.</td>
+                                <td>Administrator username for the initial setup.</td>
                             </tr>
                             <tr>
                                 <td><code>DJANGO_SUPERUSER_PASSWORD</code></td>
-                                <td>Administrator password.</td>
+                                <td>Secure password for the administrator account.</td>
                             </tr>
                             <tr>
                                 <td><code>DJANGO_SUPERUSER_EMAIL</code></td>
-                                <td>Administrator email address.</td>
+                                <td>Contact email for the administrator account.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <section id="behavior">
+                    <h2>🌐 Application Behavior</h2>
+                    <p>Settings to control the runtime environment and network access.</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Variable</th>
+                                <th>Description</th>
+                                <th>Default</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>DEBUG</code></td>
+                                <td>Enables debug mode (Set to <code>False</code> for production).</td>
+                                <td><code>False</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>ALLOWED_HOSTS</code></td>
+                                <td>Comma-separated list of allowed domains or IPs.</td>
+                                <td><code>*</code></td>
                             </tr>
                         </tbody>
                     </table>
@@ -67,7 +92,7 @@
 
                 <section id="database">
                     <h2>🗄 Database Configuration</h2>
-                    <p>By default, ScanStock uses <strong>SQLite</strong> stored in the persistent volume. For enterprise deployments, use external databases by setting <code>CUSTOM_ENGINE=true</code>.</p>
+                    <p>By default, ScanStock uses a high-performance <strong>SQLite</strong> database stored within the persistent Docker volume. Enterprise users may connect to external databases for enhanced scalability.</p>
                     <table>
                         <thead>
                             <tr>
@@ -78,23 +103,50 @@
                         <tbody>
                             <tr>
                                 <td><code>CUSTOM_ENGINE</code></td>
-                                <td>Set to <code>true</code> to enable external database configuration.</td>
+                                <td>Set to <code>true</code> to enable external database support.</td>
                             </tr>
                             <tr>
                                 <td><code>DB_ENGINE</code></td>
-                                <td>Backend: <code>django.db.backends.mysql</code> or <code>postgresql</code>.</td>
+                                <td>Database backend (e.g., <code>django.db.backends.mysql</code>).</td>
                             </tr>
                             <tr>
                                 <td><code>DB_NAME</code></td>
-                                <td>Database name.</td>
+                                <td>Name of the external database.</td>
                             </tr>
                             <tr>
                                 <td><code>DB_HOST</code></td>
-                                <td>Database host address.</td>
+                                <td>Hostname or IP of the database server.</td>
                             </tr>
                             <tr>
                                 <td><code>DB_PORT</code></td>
-                                <td>Database port (3306 for MySQL, 5432 for Postgres).</td>
+                                <td>Communication port (MySQL: 3306, Postgres: 5432).</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <section id="security">
+                    <h2>🔐 Security Settings</h2>
+                    <p>Optional hardening settings for production environments, especially when using HTTPS.</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Variable</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>SECRET_KEY</code></td>
+                                <td>A unique, unpredictable value for cryptographic signing.</td>
+                            </tr>
+                            <tr>
+                                <td><code>SESSION_COOKIE_SECURE</code></td>
+                                <td>Set to <code>True</code> to enforce secure session cookies (HTTPS).</td>
+                            </tr>
+                            <tr>
+                                <td><code>CSRF_COOKIE_SECURE</code></td>
+                                <td>Set to <code>True</code> to enforce secure CSRF cookies (HTTPS).</td>
                             </tr>
                         </tbody>
                     </table>
@@ -102,7 +154,7 @@
 
                 <section id="printer">
                     <h2>🖨 Printer Integration</h2>
-                    <p>Optional settings for connecting to warehouse label printers.</p>
+                    <p>Configuration for integrating with industrial label and barcode printers.</p>
                     <table>
                         <thead>
                             <tr>
@@ -113,15 +165,15 @@
                         <tbody>
                             <tr>
                                 <td><code>PRINTER_MODE</code></td>
-                                <td>Connection type: <code>local</code> or <code>network</code>.</td>
+                                <td>Connection type (<code>local</code> or <code>network</code>).</td>
                             </tr>
                             <tr>
                                 <td><code>PRINTER_HOST</code></td>
-                                <td>Printer IP address.</td>
+                                <td>IP address of the network printer.</td>
                             </tr>
                             <tr>
                                 <td><code>PRINTER_PORT</code></td>
-                                <td>Printer communication port (default 9100).</td>
+                                <td>Printer communication port (Standard: 9100).</td>
                             </tr>
                         </tbody>
                     </table>
