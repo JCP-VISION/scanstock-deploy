@@ -1,0 +1,16 @@
+version: "3"
+
+services:
+  scanstock:
+    image: ghcr.io/jcp-vision/scanstock:latest
+    container_name: scanstock
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    volumes:
+      - scanstock_data:/var/lib/jcp-vision
+
+volumes:
+  scanstock_data:
