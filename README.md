@@ -1,24 +1,41 @@
-# 📦 ScanStock
+# 📦 ScanStock Deploy
 
-**ScanStock** is a premium inventory and barcode scanning platform designed for efficiency and ease of use. This repository contains the source code and container configuration for deploying ScanStock as a robust, scalable service.
+**ScanStock** is a premium inventory and barcode scanning platform designed for high-efficiency warehouse and factory operations.
+
+This repository provides the **official deployment resources** for running ScanStock using Docker containers.
+
+It includes:
+
+* Deployment documentation
+* Docker Compose configuration
+* Environment configuration template
+* Example integration components
+
+> Note: This repository does **not contain the proprietary ScanStock application source code**. It contains the deployment templates required to run the platform. 
 
 ---
 
-## 🚀 Quick Start with Docker Compose
+# 🚀 Quick Start (Docker Compose)
 
-The fastest and recommended way to run **ScanStock** is with **Docker Compose**. This allows you to define configuration, networking, and volumes in a single file.
+The fastest and recommended way to run **ScanStock** is with **Docker Compose**.
 
 ---
 
-## 1️⃣ Create Environment File
+# 1️⃣ Create Environment File
 
-Copy the example environment file and update it with your credentials.
+Copy the example configuration file and create your runtime environment file.
 
 ```bash
 cp .env.example .env
 ```
 
-> **Important:** At minimum you must set:
+If your repository structure stores the example inside the `environment/` directory, use:
+
+```bash
+cp environment/.env.example .env
+```
+
+Then edit `.env` and configure the required values:
 
 ```
 LICENSE_KEY=
@@ -27,11 +44,19 @@ DJANGO_SUPERUSER_PASSWORD=
 DJANGO_SUPERUSER_EMAIL=
 ```
 
+These credentials will be used to initialize the ScanStock administrator account.
+
 ---
 
-## 2️⃣ Create `docker-compose.yml`
+# 2️⃣ Create `docker-compose.yml`
 
-Create the following file in the project directory.
+Create a file called:
+
+```
+docker-compose.yml
+```
+
+Example configuration:
 
 ```yaml
 services:
@@ -56,7 +81,7 @@ volumes:
 
 ---
 
-## 3️⃣ Start the Application
+# 3️⃣ Start ScanStock
 
 Run:
 
@@ -64,7 +89,7 @@ Run:
 docker compose up -d
 ```
 
-This will:
+Docker will:
 
 * Pull the ScanStock container
 * Create the persistent storage volume
@@ -72,7 +97,7 @@ This will:
 
 ---
 
-## 4️⃣ Access the Application
+# 4️⃣ Access the Application
 
 Open your browser:
 
@@ -80,30 +105,97 @@ Open your browser:
 http://localhost:8000
 ```
 
-Login using the admin credentials defined in your `.env` file.
+Login using the administrator credentials defined in your `.env` file.
 
 ---
 
-# 🛠️ Configuration
+# ⚙ Configuration
 
-ScanStock can be configured using environment variables in `.env`.
+ScanStock can be configured using **environment variables inside `.env`**.
 
-## Core Settings
+The `.env` file is automatically loaded into the container via Docker Compose.
 
-| Variable                  | Description            |
-| ------------------------- | ---------------------- |
-| LICENSE_KEY               | Your ScanStock license |
-| DJANGO_SUPERUSER_USERNAME | Admin username         |
-| DJANGO_SUPERUSER_PASSWORD | Admin password         |
-| DJANGO_SUPERUSER_EMAIL    | Admin email            |
+This allows system administrators to customize deployment behavior **without modifying the container image**.
 
 ---
 
+# 🧾 Environment Variables Reference
+
+Below is the complete list of supported environment variables that may be configured in the `.env` file.
+
+---
+
+# 🔑 Core Application Settings
+
+These values are **required for initial setup**.
+
+| Variable                  | Description                                         |
+| ------------------------- | --------------------------------------------------- |
+| LICENSE_KEY               | Your ScanStock license key issued by JCP-VISION     |
+| DJANGO_SUPERUSER_USERNAME | Administrator username created during first startup |
+| DJANGO_SUPERUSER_PASSWORD | Administrator password                              |
+| DJANGO_SUPERUSER_EMAIL    | Administrator email address                         |
+
+These variables are used during the **first initialization of the container** to automatically create the admin account.
+
+Example:
+
+```
+LICENSE_KEY=XXXX-XXXX-XXXX
+DJANGO_SUPERUSER_USERNAME=admin
+DJANGO_SUPERUSER_PASSWORD=StrongPassword123
+DJANGO_SUPERUSER_EMAIL=admin@company.com
+```
+
+---
+<!-- 
+# 🌐 Application Behavior
+
+These settings control general runtime behavior.
+
+| Variable      | Description                             | Default |
+| ------------- | --------------------------------------- | ------- |
+| DEBUG         | Enables Django debug mode               | False   |
+| ALLOWED_HOSTS | Comma separated list of allowed domains | *       |
+| PORT          | Application listening port              | 8000    |
+
+Example:
+
+```
+DEBUG=False
+ALLOWED_HOSTS=localhost,inventory.company.com
+PORT=8000
+```
+
+For production deployments **DEBUG must remain disabled**.
+
+---
+
+-->
 # 🗄 Database Configuration
 
-By default ScanStock uses **SQLite** stored inside the persistent volume.
+By default ScanStock uses **SQLite**, stored inside the persistent Docker volume.
 
-If you want to use **MySQL or PostgreSQL**, enable the custom engine.
+However enterprise deployments can connect to **external databases**.
+
+Enable external database configuration:
+
+```
+CUSTOM_ENGINE=true
+```
+
+Then configure database settings:
+
+| Variable    | Description             |
+| ----------- | ----------------------- |
+| DB_ENGINE   | Django database backend |
+| DB_NAME     | Database name           |
+| DB_USER     | Database username       |
+| DB_PASSWORD | Database password       |
+| DB_HOST     | Database host           |
+| DB_PORT     | Database port           |
+
+Example MySQL configuration:
 
 ```
 CUSTOM_ENGINE=true
@@ -115,27 +207,106 @@ DB_HOST=mysql
 DB_PORT=3306
 ```
 
+Example PostgreSQL configuration:
+
+```
+CUSTOM_ENGINE=true
+DB_ENGINE=django.db.backends.postgresql
+DB_NAME=scanstock
+DB_USER=postgres
+DB_PASSWORD=password
+DB_HOST=postgres
+DB_PORT=5432
+```
+
+If `CUSTOM_ENGINE` is not enabled, ScanStock will automatically use the built-in SQLite database.
+
 ---
 
-# 💾 Persistent Storage
+# 📂 Storage Configuration
 
-ScanStock stores important runtime data in the mounted volume:
+ScanStock stores runtime data in:
 
 ```
 /var/lib/jcp-vision
 ```
 
-Contents include:
+This directory contains:
 
-* SQLite database
-* Uploaded media
+* SQLite database (if used)
+<!-- * Uploaded files -->
+<!-- * Inventory data -->
 * License state
+* Runtime application files
 
-This ensures data survives container restarts and updates.
+Docker mounts this directory as a **persistent volume** so data survives container updates.
 
 ---
 
-# 🔄 Maintenance
+# 🔐 Security Settings
+
+Optional environment variables may be used for security hardening.
+
+| Variable              | Description                   |
+| --------------------- | ----------------------------- |
+| SECRET_KEY            | Django secret key override    |
+| SESSION_COOKIE_SECURE | Enforce HTTPS session cookies |
+| CSRF_COOKIE_SECURE    | Secure CSRF cookies           |
+
+Example:
+
+```
+SECRET_KEY=super-secret-key
+SESSION_COOKIE_SECURE=True
+CSRF_COOKIE_SECURE=True
+```
+
+These should be configured when deploying behind HTTPS.
+
+---
+
+# 🖨 Printer Integration (Optional)
+
+Factories may integrate **label printers** or barcode printers.
+
+Optional configuration:
+
+| Variable     | Description     |
+| ------------ | --------------- |
+| PRINTER_MODE | local / network |
+| PRINTER_HOST | Printer IP      |
+| PRINTER_PORT | Printer port    |
+
+Example:
+
+```
+PRINTER_MODE=network
+PRINTER_HOST=192.168.1.45
+PRINTER_PORT=9100
+```
+
+This allows direct printing from ScanStock to warehouse label printers.
+
+---
+
+# 💾 Persistent Storage
+
+ScanStock stores runtime data in the mounted Docker volume:
+
+```
+/var/lib/jcp-vision
+```
+
+This ensures:
+
+* Database persistence
+* Uploaded files retained
+* License data preserved
+* Safe upgrades
+
+---
+
+# 🔧 Maintenance
 
 ## View Logs
 
@@ -143,13 +314,13 @@ This ensures data survives container restarts and updates.
 docker compose logs -f scanstock
 ```
 
-## Restart
+## Restart Service
 
 ```
 docker compose restart
 ```
 
-## Stop
+## Stop Containers
 
 ```
 docker compose down
@@ -159,25 +330,31 @@ docker compose down
 
 # 🔄 Updating ScanStock
 
-To upgrade to a new version:
+To upgrade to a newer container version:
 
 ```bash
 docker compose pull
 docker compose up -d
 ```
 
-Your data will remain intact in the persistent volume.
+Your data will remain intact inside the persistent volume.
 
 ---
 
-# 🖥 Platform Support
+# 🔐 License
 
-ScanStock runs in a **Linux-based container**.
+This repository is distributed under the **JCP-VISION Source-Available License**.
 
-For Windows users:
+This repository may be used to **deploy and operate ScanStock**, but redistribution, resale, or use as part of a competing service is prohibited.
 
-Ensure **Docker Desktop** is running in **Linux container mode**.
+A valid **ScanStock license key** is required to operate the platform.
+
+For licensing inquiries contact:
+
+```
+licensing@jcp-vision.com
+```
 
 ---
 
-© 2026 JCP‑VISION LIMITED
+© 2026 **JCP-VISION LIMITED**

@@ -19,10 +19,11 @@ def get_target_printer_name():
     If not found, searches available printers and skips common virtual printers.
     Falls back to the default printer.
     """
-    from SCANSTOCK.context.project_config import get_priority_config
+    from common.project_config import get_priority_config
 
     # 1. Check config
-    config_printer = get_priority_config(path="tool.configs", key="local_printer_name", default=None, data_type=str) # NOTE: NOT ADDED DELETE!
+    config_printer = get_priority_config(
+        path="tool.configs", key="local_printer_name", default=None, data_type=str)  # NOTE: NOT ADDED DELETE!
     if config_printer:
         return config_printer
 
