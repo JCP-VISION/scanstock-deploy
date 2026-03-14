@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Docker Deployment</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<h1>Docker Compose Deployment</h1>
+
+<h2>docker-compose.yml</h2>
+
+<pre>
+services:
+
+  scanstock:
+    image: ghcr.io/jcp-vision/scanstock:latest
+    container_name: scanstock
+    restart: unless-stopped
+
+    ports:
+      - "8000:8000"
+
+    env_file:
+      - .env
+
+    volumes:
+      - scanstock_data:/var/lib/jcp-vision
+
+volumes:
+  scanstock_data:
+</pre>
+
+<h2>Start Container</h2>
+
+<pre>
+docker compose up -d
+</pre>
+
+<h2>Access Application</h2>
+
+<pre>
+http://localhost:8000
+</pre>
+
+</body>
+</html>

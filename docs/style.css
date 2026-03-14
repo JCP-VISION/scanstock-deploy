@@ -1,0 +1,28 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 40px;
+    background: #f7f7f7;
+}
+
+header {
+    margin-bottom: 30px;
+}
+
+nav a {
+    margin-right: 20px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+section {
+    background: white;
+    padding: 20px;
+    border-radius: 6px;
+}
+
+pre {
+    background: #111;
+    color: #0f0;
+    padding: 12px;
+    overflow-x: auto;
+}

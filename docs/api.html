@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Health Endpoint</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<h1>Health Endpoint</h1>
+
+<p>The documentation site exposes a simple health endpoint.</p>
+
+<pre>
+GET /health
+</pre>
+
+Example:
+
+<pre>
+curl https://scanstock-docs.jcp-vision.com/health
+</pre>
+
+Response:
+
+<pre>
+{
+ "status": "ok",
+ "service": "scanstock-docs"
+}
+</pre>
+
+</body>
+</html>
