@@ -2,51 +2,48 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>ScanStock Deployment Docs</title>
-<link rel="stylesheet" href="style.css">
+<title>ScanStock Docs</title>
+
+<link rel="stylesheet" href="assets/style.css">
+<script defer src="assets/script.js"></script>
+
 </head>
 
 <body>
 
-<header>
-<h1>ScanStock Deployment</h1>
-<p>Official deployment documentation for ScanStock</p>
-</header>
+<div class="layout">
+
+<aside class="sidebar">
+
+<h2>ScanStock</h2>
 
 <nav>
+<a href="index.html">Overview</a>
 <a href="installation.html">Installation</a>
-<a href="docker.html">Docker Setup</a>
+<a href="docker.html">Docker</a>
 <a href="configuration.html">Configuration</a>
 <a href="api.html">API</a>
 </nav>
 
-<section>
+<button onclick="toggleTheme()">Toggle Dark Mode</button>
 
-<h2>Overview</h2>
+</aside>
+
+<main class="content">
+
+<h1>ScanStock Deployment</h1>
 
 <p>
-ScanStock is a premium inventory and barcode scanning platform designed for
-high-efficiency warehouse and factory operations.
+Official deployment documentation for ScanStock.
 </p>
 
-<p>
-This documentation explains how to deploy ScanStock using Docker containers.
-</p>
+<h2>Quick Start</h2>
 
-<h3>Quick Links</h3>
+<pre><code>docker pull ghcr.io/jcp-vision/scanstock:latest</code></pre>
 
-<ul>
-<li><a href="installation.html">Installation Guide</a></li>
-<li><a href="docker.html">Docker Compose Setup</a></li>
-<li><a href="configuration.html">Environment Configuration</a></li>
-<li><a href="api.html">Health Endpoint</a></li>
-</ul>
+</main>
 
-</section>
-
-<footer>
-<p>© 2026 JCP-VISION</p>
-</footer>
+</div>
 
 </body>
 </html>
