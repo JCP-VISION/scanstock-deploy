@@ -28,6 +28,8 @@ app.add_middleware(
 class PrintRequest(BaseModel):
     barcode: str
     printer_name: Optional[str] = None
+    code_type: Optional[str] = "auto"
+    custom_subtitle: Optional[str] = None
 
 
 @app.get("/health")
@@ -61,7 +63,12 @@ def print_label(request: PrintRequest):
     """
     try:
         logging.info(f"Received silent print request for barcode: {request.barcode}")
-        print_local_barcode_label(request.barcode, printer_name=request.printer_name)
+        print_local_barcode_label(
+            request.barcode,
+            printer_name=request.printer_name,
+            code_type=request.code_type,
+            custom_subtitle=request.custom_subtitle,
+        )
         return {"status": "success", "message": "Print job sent successfully"}
     except Exception as e:
         logging.error(f"Error printing label: {e}")

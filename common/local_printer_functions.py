@@ -5,6 +5,7 @@ import tempfile
 
 from PIL import Image, ImageDraw, ImageFont, ImageWin
 import barcode
+from barcode import Code128
 from barcode.writer import ImageWriter
 import qrcode
 
@@ -184,6 +185,33 @@ def create_barcode(data):
     return saved
 
 
+def create_barcode_image(barcode_data, custom_subtitle=None):
+    """
+    Render a Code128 barcode as a PIL image, optionally with custom subtitle text.
+    """
+    my_barcode = Code128(barcode_data, writer=ImageWriter())
+
+    if custom_subtitle is not None:
+        my_barcode.get_fullcode = lambda: custom_subtitle
+
+    return my_barcode.render()
+
+
+def create_barcode_with_subtitle(data, custom_subtitle):
+    """
+    Generate a Code128 barcode image file with explicit subtitle text.
+    """
+    barcode_img = create_barcode_image(data, custom_subtitle=custom_subtitle)
+
+    temp_file = tempfile.NamedTemporaryFile(delete=False, suffix=".png")
+    filepath = temp_file.name
+    temp_file.close()
+
+    barcode_img.save(filepath)
+    logging.info(f"Code128 barcode with subtitle created: {filepath}")
+    return filepath
+
+
 def create_qrcode(data):
     """
     Generate a QR code image from a given string value.
@@ -219,11 +247,48 @@ def create_qrcode(data):
     return filepath
 
 
-def create_code_image(data):
+def is_login_barcode_override_enabled():
+    """
+    Returns True when login barcode override is enabled in config.
+    """
+    try:
+        from common.project_config import get_priority_config
+        return get_priority_config(
+            path="tool.configs",
+            key="login_barcode_override",
+            default=False,
+            data_type=bool,
+        )
+    except Exception as e:
+        logging.error(f"Unable to read login_barcode_override config: {e}")
+        return False
+
+
+def create_code_image(data, code_type=None, custom_subtitle=None, login_barcode_override=None):
     """
     Auto-detect and generate the appropriate code image
     (QR code or 1D barcode) based on the data content.
     """
+    normalized_code_type = (code_type or "auto").strip().lower()
+
+    if normalized_code_type == "barcode":
+        if custom_subtitle:
+            logging.info("Explicit code_type=barcode with custom subtitle")
+            return create_barcode_with_subtitle(data, custom_subtitle=custom_subtitle)
+        logging.info("Explicit code_type=barcode")
+        return create_barcode(data)
+
+    if normalized_code_type == "qr":
+        logging.info("Explicit code_type=qr")
+        return create_qrcode(data)
+
+    if login_barcode_override is None:
+        login_barcode_override = is_login_barcode_override_enabled()
+
+    if login_barcode_override and is_qr_data(data):
+        logging.info("login_barcode_override enabled: forcing Code128 for QR-style data")
+        return create_barcode_with_subtitle(data, custom_subtitle="LOGIN CREDENTIALS")
+
     if is_qr_data(data):
         return create_qrcode(data)
     return create_barcode(data)
@@ -378,7 +443,7 @@ def print_local_label(file_path, printer_name=None):
             logging.error(f"Linux printing failed: {e}")
 
 
-def print_local_barcode_label(barcode_value, printer_name=None):
+def print_local_barcode_label(barcode_value, printer_name=None, code_type=None, custom_subtitle=None):
     """
     High-level function to generate and print a barcode/QR label.
 
@@ -400,7 +465,11 @@ def print_local_barcode_label(barcode_value, printer_name=None):
     target_printer = printer_name if printer_name else get_target_printer_name()
     width, height = get_local_printer_size(target_printer)
 
-    code_path = create_code_image(barcode_value)
+    code_path = create_code_image(
+        barcode_value,
+        code_type=code_type,
+        custom_subtitle=custom_subtitle,
+    )
 
     label_path = create_label(
         code_path,
