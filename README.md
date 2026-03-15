@@ -168,7 +168,6 @@ LICENSE_KEY=XXXX-XXXX-XXXX
 DJANGO_SUPERUSER_USERNAME=admin
 DJANGO_SUPERUSER_PASSWORD=StrongPassword123
 DJANGO_SUPERUSER_EMAIL=admin@company.com
-login_barcode_override=false # Override login with barcode instead of QR code.
 ```
 
 ---
