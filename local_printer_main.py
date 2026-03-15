@@ -8,8 +8,10 @@ import uvicorn
 from typing import Optional
 from common.local_printer_functions import print_local_barcode_label, get_all_printers
 
-logging.basicConfig(level=logging.INFO,
-                    format="%(asctime)s | %(levelname)s | %(message)s")
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s | %(levelname)s | %(message)s"
+)
 
 app = FastAPI(title="ScanStock Silent Printer API")
 
@@ -24,13 +26,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
 class PrintRequest(BaseModel):
     barcode: str
     printer_name: Optional[str] = None
     code_type: Optional[str] = "auto"
     custom_subtitle: Optional[str] = None
-
 
 @app.get("/health")
 def health_check():
@@ -39,7 +39,6 @@ def health_check():
     printer service is actively running on this machine.
     """
     return {"status": "ok"}
-
 
 @app.get("/printers")
 def get_printers():
@@ -51,9 +50,7 @@ def get_printers():
         return {"printers": printers}
     except Exception as e:
         logging.error(f"Error fetching local printers: {e}")
-        raise HTTPException(
-            status_code=500, detail="Failed to fetch local printers.")
-
+        raise HTTPException(status_code=500, detail="Failed to fetch local printers.")
 
 @app.post("/print-label/")
 def print_label(request: PrintRequest):
@@ -73,7 +70,6 @@ def print_label(request: PrintRequest):
     except Exception as e:
         logging.error(f"Error printing label: {e}")
         raise HTTPException(status_code=500, detail=str(e))
-
 
 if __name__ == "__main__":
     # Start the server on port 54321, easily reachable from localhost

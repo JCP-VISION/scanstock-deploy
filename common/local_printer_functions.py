@@ -2,16 +2,14 @@ import logging
 import platform
 import subprocess
 import tempfile
-
+# ADD get_priority_config HERE!
 from PIL import Image, ImageDraw, ImageFont, ImageWin
 import barcode
 from barcode import Code128
 from barcode.writer import ImageWriter
 import qrcode
 
-logging.basicConfig(level=logging.DEBUG,
-                    format="%(asctime)s | %(levelname)s | %(message)s")
-
+logging.basicConfig(level=logging.DEBUG, format="%(asctime)s | %(levelname)s | %(message)s")
 
 def get_target_printer_name():
     """
@@ -24,7 +22,11 @@ def get_target_printer_name():
 
     # 1. Check config
     config_printer = get_priority_config(
-        path="tool.configs", key="local_printer_name", default=None, data_type=str)  # NOTE: NOT ADDED DELETE!
+        path="tool.configs",
+        key="local_printer_name",
+        default=None,
+        data_type=str
+    )  # NOTE: NOT ADDED DELETE!
     if config_printer:
         return config_printer
 
@@ -42,11 +44,9 @@ def get_target_printer_name():
             for printer in printers:
                 # printer is a tuple, printer[2] is the printer name
                 p_name = printer[2]
-                is_virtual = any(kw in p_name.lower()
-                                 for kw in skip_keywords)
+                is_virtual = any(kw in p_name.lower() for kw in skip_keywords)
                 if not is_virtual:
-                    logging.info(
-                        f"Auto-selected non-virtual printer: {p_name}")
+                    logging.info(f"Auto-selected non-virtual printer: {p_name}")
                     return p_name
 
             # 3. Fallback to default
@@ -55,7 +55,6 @@ def get_target_printer_name():
             logging.error(f"Error enumerating printers: {e}")
 
     return None
-
 
 def get_all_printers():
     """
@@ -93,7 +92,6 @@ def get_all_printers():
             logging.error(f"Error enumerating Linux printers: {e}")
 
     return sorted(printers_list)
-
 
 def get_local_printer_size(printer_name=None):
     """
@@ -138,7 +136,6 @@ def get_local_printer_size(printer_name=None):
 
     return 812, 1218  # DEFAULT_WIDTH, DEFAULT_HEIGHT
 
-
 def is_qr_data(data):
     """
     Detect whether the data should be encoded as a QR code
@@ -148,7 +145,6 @@ def is_qr_data(data):
     (user login QR codes, delimited by commas or pipes).
     """
     return 'AUTH:JCV' in data
-
 
 def create_barcode(data):
     """
@@ -184,7 +180,6 @@ def create_barcode(data):
 
     return saved
 
-
 def create_barcode_image(barcode_data, custom_subtitle=None):
     """
     Render a Code128 barcode as a PIL image, optionally with custom subtitle text.
@@ -195,7 +190,6 @@ def create_barcode_image(barcode_data, custom_subtitle=None):
         my_barcode.get_fullcode = lambda: custom_subtitle
 
     return my_barcode.render()
-
 
 def create_barcode_with_subtitle(data, custom_subtitle):
     """
@@ -210,7 +204,6 @@ def create_barcode_with_subtitle(data, custom_subtitle):
     barcode_img.save(filepath)
     logging.info(f"Code128 barcode with subtitle created: {filepath}")
     return filepath
-
 
 def create_qrcode(data):
     """
@@ -237,15 +230,13 @@ def create_qrcode(data):
 
     img = qr.make_image(fill_color="black", back_color="white")
 
-    temp_file = tempfile.NamedTemporaryFile(
-        delete=False, suffix=".png")
+    temp_file = tempfile.NamedTemporaryFile(delete=False, suffix=".png")
     filepath = temp_file.name
     temp_file.close()
 
     img.save(filepath)
     logging.info(f"QR code created: {filepath}")
     return filepath
-
 
 def is_login_barcode_override_enabled():
     """
@@ -262,7 +253,6 @@ def is_login_barcode_override_enabled():
     except Exception as e:
         logging.error(f"Unable to read login_barcode_override config: {e}")
         return False
-
 
 def create_code_image(data, code_type=None, custom_subtitle=None, login_barcode_override=None):
     """
@@ -292,7 +282,6 @@ def create_code_image(data, code_type=None, custom_subtitle=None, login_barcode_
     if is_qr_data(data):
         return create_qrcode(data)
     return create_barcode(data)
-
 
 def create_label(barcode_path, printer_w, printer_h):
     """
@@ -329,8 +318,7 @@ def create_label(barcode_path, printer_w, printer_h):
     barcode_img = Image.open(barcode_path)
 
     img_w, img_h = barcode_img.size
-    is_square = abs(img_w - img_h) < max(img_w, img_h) * \
-        0.1  # QR codes are square
+    is_square = abs(img_w - img_h) < max(img_w, img_h) * 0.1  # QR codes are square
 
     if is_square:
         # QR code: keep it square, fit within the label
@@ -360,7 +348,6 @@ def create_label(barcode_path, printer_w, printer_h):
     logging.info(f"Label created: {label_path}")
 
     return label_path
-
 
 def print_local_label(file_path, printer_name=None):
     """
@@ -441,7 +428,6 @@ def print_local_label(file_path, printer_name=None):
                 subprocess.run(["lp", file_path])
         except Exception as e:
             logging.error(f"Linux printing failed: {e}")
-
 
 def print_local_barcode_label(barcode_value, printer_name=None, code_type=None, custom_subtitle=None):
     """
