@@ -160,9 +160,50 @@
                     </table>
                 </section>
 
-                <section id="printer">
-                    <h2>🖨 Printer Integration</h2>
-                    <p>Configuration for integrating with industrial label and barcode printers.</p>
+                <section id="operational">
+                    <h2>⚙ Operational Settings</h2>
+                    <p>These control system behavior and scanning features.</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Variable</th>
+                                <th>Description</th>
+                                <th>Default</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>WEB_LABEL_PRINTER</code></td>
+                                <td>Enable web label printing.</td>
+                                <td><code>True</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>TRANSACTION_APPROVAL_NEEDED</code></td>
+                                <td>Require approval for transactions.</td>
+                                <td><code>True</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>LOGIN_AUTH_NEEDED</code></td>
+                                <td>Require authentication barcode login.</td>
+                                <td><code>True</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>ALLOW_ORDER_ENTRY</code></td>
+                                <td>Allow manual order entry.</td>
+                                <td><code>True</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>LOGIN_BARCODE_OVERRIDE</code></td>
+                                <td>Allow barcode login override.</td>
+                                <td><code>False</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <section id="scanning">
+                    <h2>📦 Barcode Scanning Configuration</h2>
+                    <p>These settings define barcode formats recognized by the system.</p>
                     <table>
                         <thead>
                             <tr>
@@ -172,16 +213,67 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td><code>PRINTER_MODE</code></td>
-                                <td>Connection type (<code>local</code> or <code>network</code>).</td>
+                                <td><code>ITEM_SCAN_REGEX</code></td>
+                                <td>Regex pattern for item barcodes.</td>
                             </tr>
                             <tr>
-                                <td><code>PRINTER_HOST</code></td>
-                                <td>IP address of the network printer.</td>
+                                <td><code>QTY_SCAN_REGEX</code></td>
+                                <td>Regex pattern for quantity scans.</td>
                             </tr>
                             <tr>
-                                <td><code>PRINTER_PORT</code></td>
-                                <td>Printer communication port (Standard: 9100).</td>
+                                <td><code>AUTH_SCAN_REGEX</code></td>
+                                <td>Regex pattern for authentication barcodes.</td>
+                            </tr>
+                            <tr>
+                                <td><code>ORDER_SCAN_REGEX</code></td>
+                                <td>Regex pattern for order barcodes.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <section id="checks">
+                    <h2>🔁 License & System Checks</h2>
+                    <p>Settings controlling licensing validation interval and behavior.</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Variable</th>
+                                <th>Description</th>
+                                <th>Default</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>CHECK_PERIODIC</code></td>
+                                <td>Enable periodic system checks.</td>
+                                <td><code>True</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>LICENSE_CHECK_INTERVAL_SECONDS</code></td>
+                                <td>License validation interval (in seconds).</td>
+                                <td><code>300</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <section id="printer">
+                    <h2>🖨 Printer Configuration</h2>
+                    <p>Configure the internal label printing service.</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Variable</th>
+                                <th>Description</th>
+                                <th>Default</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>PRINTER_LOCAL_PORT</code></td>
+                                <td>Port used by the local printer service.</td>
+                                <td><code>54321</code></td>
                             </tr>
                         </tbody>
                     </table>

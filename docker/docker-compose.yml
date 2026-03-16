@@ -1,14 +1,19 @@
-version: "3"
-
 services:
+
   scanstock:
     image: ghcr.io/jcp-vision/scanstock:latest
     container_name: scanstock
     restart: unless-stopped
+
     ports:
-      - "8000:8000"
+      - "8888:8000"
+
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
     env_file:
       - .env
+
     volumes:
       - scanstock_data:/var/lib/jcp-vision
 

@@ -59,6 +59,17 @@ volumes:
   scanstock_data:</code></pre>
                 </section>
 
+                <section id="ports">
+                    <h2>🔌 Port Configuration</h2>
+                    <p>ScanStock runs <strong>inside the container on port 8000</strong>. You may map this to any port on your server.</p>
+                    <p>Example mapping <code>8080:8000</code> means:</p>
+                    <ul>
+                        <li>Host Port: <code>8080</code></li>
+                        <li>Container Port: <code>8000</code></li>
+                    </ul>
+                    <p>Access the application at <code>http://server-ip:8080</code>.</p>
+                </section>
+
                 <section id="start">
                     <h2>3️⃣ Start ScanStock</h2>
                     <p>Initialize the deployment by running the following command in your terminal. This will pull the latest container image and start the application in the background.</p>
@@ -70,11 +81,39 @@ volumes:
                     </div>
                 </section>
 
+                <section id="init">
+                    <h2>🔧 Container Initialization</h2>
+                    <p>On the <strong>first startup</strong>, the ScanStock container automatically performs:</p>
+                    <ul>
+                        <li>Database migrations</li>
+                        <li>Administrator account creation</li>
+                        <li>Static asset collection</li>
+                        <li>Runtime storage initialization</li>
+                    </ul>
+                    <p>No manual setup steps are required. These tasks are handled automatically by the container entrypoint.</p>
+                </section>
+
                 <section id="access">
                     <h2>4️⃣ Access the Application</h2>
-                    <p>Open your browser and navigate to:</p>
-                    <pre><code>http://localhost:8000</code></pre>
+                    <p>Open your browser and navigate to the application using your server IP and the mapped host port.</p>
+                    <pre><code>http://server-ip:HOST_PORT</code></pre>
+                    <p>Example if using port mapping <code>8080:8000</code>:</p>
+                    <pre><code>http://localhost:8080</code></pre>
                     <p>Login using the administrator credentials defined in your <code>.env</code> file.</p>
+                </section>
+
+                <section id="logs">
+                    <h2>📄 Logs</h2>
+                    <p>To view real-time container logs for troubleshooting or monitoring:</p>
+                    <pre><code>docker compose logs -f scanstock</code></pre>
+                </section>
+
+                <section id="updates">
+                    <h2>🔄 Updating ScanStock</h2>
+                    <p>To update to the latest version, pull the new image and restart the containers:</p>
+                    <pre><code>docker compose pull
+docker compose up -d</code></pre>
+                    <p>Because runtime data is stored in the Docker volume, your data remains intact during updates.</p>
                 </section>
 
                 <hr>
