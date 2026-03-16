@@ -103,7 +103,10 @@ services:
     restart: unless-stopped
 
     ports:
-      - "8000:8000"
+      - "8000:8000" # Change the first 8000 to any port you want to use on your host machine
+
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
 
     env_file:
       - .env
