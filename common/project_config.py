@@ -30,6 +30,8 @@ def get_priority_config(path=None, key=None, default=None, data_type=None):
                 if data_type:
                     if data_type == bool:
                         return env_val.lower() in ["true", "1", "yes", "True", "TRUE"]
+                    elif data_type == list:
+                        return env_val.split(",")
                     # elif data_type == int:
                     #     return int(env_val)
                     # elif data_type == float:

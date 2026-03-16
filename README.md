@@ -52,12 +52,6 @@ Copy the example configuration file and create your runtime environment file.
 cp .env.example .env
 ```
 
-If your repository structure stores the example inside the `environment/` directory, use:
-
-```bash
-cp environment/.env.example .env
-```
-
 Then edit `.env` and configure the required values:
 
 ```ini
