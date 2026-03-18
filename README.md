@@ -282,6 +282,8 @@ These control **system behavior and scanning features**.
 | LOGIN_AUTH_NEEDED           | Require authentication barcode login | True    |
 | ALLOW_ORDER_ENTRY           | Allow manual order entry             | True    |
 | LOGIN_BARCODE_OVERRIDE      | Allow barcode login override         | False   |
+| ALLOW_ORDER_SCAN            | Allow scanning for order details     | True    |
+| ENFORCE_JS_REGEX           | Enforce Javascript regex validation | True    |
 
 Example:
 
